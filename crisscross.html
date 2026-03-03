@@ -1,35 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criss-Crossword</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criss-Crossword</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script>
-        async function fetchJSONData() {
-          try {
-            // Fetch the file from the specified path
-            const response = await fetch('./three-letter-words.json');
-
-            // Check if the request was successful
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            // Parse the response body as JSON
-            const data = await response.json();
-            console.log(data); // You can now access data.name, data.age, etc.
-
-            // Example: access specific properties
-            console.log("Word List:\n", data);
-          } catch (error) {
-            console.error('Error fetching JSON:', error);
-          }
-        }
-
-        // Call the function
-        fetchJSONData();
-    </script>
+  <h1>Criss-Crossword</h1>
+  <button id="generateButton">Generate Word Square</button>
+  <div id="output"></div>
+  
+  
+  <script src="script.js"></script>
 </body>
 </html>
