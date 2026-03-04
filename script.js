@@ -76,7 +76,7 @@ function createWordSquare() {
 
   function backtrack(row) { 
     if (row === 3) {
-      wordSquares.push(board.map(r => r.join(' ')));
+      wordSquares.push(board.map(r => r.join('')));
       return;
     }
 
@@ -112,9 +112,12 @@ var currentSquare = [];
 document.getElementById('generateButton').addEventListener('click', () => {
   console.log("Possible word squares:", wordSquares.length);
   const randomIndex = Math.floor(Math.random() * wordSquares.length);
+  solutionSquare = wordSquares[randomIndex];
+  console.log("Solution:", solutionSquare);
   currentSquare = wordSquares[randomIndex];
-  currentSquare = currentSquare.map(line => line.replace(/\s/g, '').split('')); //Remove spaces and split into characters
-  console.log("Selected word square:", currentSquare);
+  currentSquare = currentSquare.map(line => line.replace(/\s/g, '').split('')); //Remove spaces and 
+  
+  currentSquare = shuffleWordSquare(currentSquare); //Shuffle the word square to create a new configuration
 
   cells.forEach((cell, index) => {
     const cellRow = Math.floor(index / 3); //Calculate the row index for the current cell
@@ -186,3 +189,27 @@ shiftButtons.forEach(button => {
     button.style.left = `${-276 + (indexVal * -105)}px`; 
   }
 });
+
+function shuffleWordSquare(square) {
+  const shuffledSquare = JSON.parse(JSON.stringify(square)); //Deep copy of the square
+  const shuffleCount = Math.floor(Math.random() * 5) + 10; //Random number of shuffles between 10 and 15
+
+  for (let i = 0; i < shuffleCount; i++) {
+    const index = Math.floor(Math.random() * 3); //Randomly select a row or column index
+
+    if (Math.random() < 0.5) { //if < 0.5, shuffle a row; if >= 0.5, shuffle a column
+      //Shuffle row
+      const temp = shuffledSquare[index][0];
+      shuffledSquare[index][0] = shuffledSquare[index][1];
+      shuffledSquare[index][1] = shuffledSquare[index][2];
+      shuffledSquare[index][2] = temp;
+    } else {
+      //Shuffle column
+      const temp = shuffledSquare[0][index];
+      shuffledSquare[0][index] = shuffledSquare[1][index];
+      shuffledSquare[1][index] = shuffledSquare[2][index];
+      shuffledSquare[2][index] = temp;
+    }
+  }
+  return shuffledSquare;
+}
