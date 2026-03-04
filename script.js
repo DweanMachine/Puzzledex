@@ -22,7 +22,7 @@ fetchJSONData();
 
 class TrieNode {
   constructor() {
-    this.children = {}; //Maps letter -> TrieNode
+    this.children = {};
     this.isEnd = false;
   }
 }
@@ -76,7 +76,7 @@ function createWordSquare() {
 
   function backtrack(row) { 
     if (row === 3) {
-      wordSquares.push(board.map(r => r.join('')));
+      wordSquares.push(board.map(r => r.join(' ')));
       return;
     }
 
@@ -103,14 +103,86 @@ function createWordSquare() {
   backtrack(0); //Start backtracking from the first row
 }
 
+const outputspan = document.getElementById('output');
+
+const cells = document.querySelectorAll('.cell');
+var currentSquare = [];
+
 //Function to generate a random word square and display it
 document.getElementById('generateButton').addEventListener('click', () => {
   console.log("Possible word squares:", wordSquares.length);
-  const outputspan = document.getElementById('output');
   const randomIndex = Math.floor(Math.random() * wordSquares.length);
-  const randomSquare = wordSquares[randomIndex][0].split('').join(' ') + '\n' +
-                       wordSquares[randomIndex][1].split('').join(' ') + '\n' +
-                       wordSquares[randomIndex][2].split('').join(' ');
-  outputspan.innerHTML = randomSquare.replace(/\n/g, '<br>');
-  console.log(randomSquare);
+  currentSquare = wordSquares[randomIndex];
+  currentSquare = currentSquare.map(line => line.replace(/\s/g, '').split('')); //Remove spaces and split into characters
+  console.log("Selected word square:", currentSquare);
+
+  cells.forEach((cell, index) => {
+    const cellRow = Math.floor(index / 3); //Calculate the row index for the current cell
+    const cellCol = index % 3; //Calculate the column index for the current cell
+    cell.innerText = currentSquare[cellRow][cellCol];
+  });
+});
+
+const shifts = document.querySelectorAll('.shift');
+shifts.forEach(button => {
+  button.addEventListener('click', () => {
+    console.log("Before:", currentSquare);
+    const cellInfo = button.id.split('-'); //Extract the column index from the button ID 
+    
+    const indexVal = parseInt(cellInfo[0]);
+    const direction = cellInfo[1];
+
+    if (direction === 'up') {
+      const temp = currentSquare[0][indexVal];
+      currentSquare[0][indexVal] = currentSquare[1][indexVal];
+      currentSquare[1][indexVal] = currentSquare[2][indexVal];
+      currentSquare[2][indexVal] = temp;
+
+    } else if (direction === 'down') {
+      const temp = currentSquare[2][indexVal];
+      currentSquare[2][indexVal] = currentSquare[1][indexVal];
+      currentSquare[1][indexVal] = currentSquare[0][indexVal];
+      currentSquare[0][indexVal] = temp;
+    } else if (direction === 'left') {
+      const temp = currentSquare[indexVal][0];
+      currentSquare[indexVal][0] = currentSquare[indexVal][1];
+      currentSquare[indexVal][1] = currentSquare[indexVal][2];
+      currentSquare[indexVal][2] = temp;
+    } else if (direction === 'right') {
+      const temp = currentSquare[indexVal][2];
+      currentSquare[indexVal][2] = currentSquare[indexVal][1];
+      currentSquare[indexVal][1] = currentSquare[indexVal][0];
+      currentSquare[indexVal][0] = temp;
+    } else {
+      console.error("Invalid direction:", direction);
+      return;
+    }
+    cells.forEach((cell, index) => {
+        const cellRow = Math.floor(index / 3);
+        const cellCol = index % 3;
+        cell.innerText = currentSquare[cellRow][cellCol];
+    });
+  });
+});
+
+//Align arrows
+const shiftButtons = document.querySelectorAll('.shift');
+shiftButtons.forEach(button => {
+  const cellInfo = button.id.split('-');
+  const indexVal = parseInt(cellInfo[0]);
+  const direction = cellInfo[1];
+
+  if (direction === 'up') {
+    button.style.top = '47px'; 
+    button.style.left = `${40 + (indexVal * 13)}px`; 
+  } else if (direction === 'down') {
+    button.style.top = `-27px`;
+    button.style.left = `${40 + (indexVal * 13)}px`; 
+  } else if (direction === 'left') {
+    button.style.top = `${120 + (indexVal * 117)}px`; 
+    button.style.left = `${-347 + (indexVal * -105)}px`; 
+  } else if (direction === 'right') {
+    button.style.top = `${120 + (indexVal * 117)}px`; 
+    button.style.left = `${-276 + (indexVal * -105)}px`; 
+  }
 });

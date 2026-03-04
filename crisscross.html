@@ -8,10 +8,32 @@
 </head>
 <body>
   <h1>Criss-Crossword</h1>
-  <button id="generateButton">Generate Word Square</button>
-  <div id="output"></div>
+  <button id="generateButton">Generate Word Square</button> <br>
+
+  <div id="gameContainer">
+    <img src="images/upArrow.png" id="0-up" class="shift"></img>
+    <img src="images/upArrow.png" id="1-up" class="shift"></img>
+    <img src="images/upArrow.png" id="2-up" class="shift"></img>
   
-  
+    <img src="images/upArrow.png" id="0-left" class="shift left"></img>
+    <img src="images/upArrow.png" id="1-left" class="shift left"></img>
+    <img src="images/upArrow.png" id="2-left" class="shift left"></img>
+
+    <img src="images/upArrow.png" id="0-right" class="shift right"></img>
+    <img src="images/upArrow.png" id="1-right" class="shift right"></img>
+    <img src="images/upArrow.png" id="2-right" class="shift right"></img>
+
+    <div id="output">
+      <div id="0-0" class="cell"></div> <div id="0-1" class="cell"></div> <div id="0-2" class="cell"></div>
+      <div id="1-0" class="cell"></div> <div id="1-1" class="cell"></div> <div id="1-2" class="cell"></div>
+      <div id="2-0" class="cell"></div> <div id="2-1" class="cell"></div> <div id="2-2" class="cell"></div>
+    </div>
+
+    <img src="images/upArrow.png" id="0-down" class="shift down"></img>
+    <img src="images/upArrow.png" id="1-down" class="shift down"></img>
+    <img src="images/upArrow.png" id="2-down" class="shift down"></img>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
