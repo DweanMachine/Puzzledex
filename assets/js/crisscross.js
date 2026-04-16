@@ -3,7 +3,7 @@ let wordSquares = [];
 
 async function fetchJSONData() {
   try {
-    const response = await fetch('./wordlists/three-letter-words.json');
+    const response = await fetch('../wordlists/three-letter-words.json');
 
     // Check if the request was successful
     if (!response.ok) { throw new Error(`HTTP error! Status: ${response.status}`); }
@@ -174,25 +174,6 @@ shifts.forEach(button => {
 
 //Align arrows
 const shiftButtons = document.querySelectorAll('.shift');
-shiftButtons.forEach(button => {
-  const cellInfo = button.id.split('-');
-  const indexVal = parseInt(cellInfo[0]);
-  const direction = cellInfo[1];
-
-  if (direction === 'up') {
-    button.style.top = '47px'; 
-    button.style.left = `${40 + (indexVal * 13)}px`; 
-  } else if (direction === 'down') {
-    button.style.top = `-27px`;
-    button.style.left = `${40 + (indexVal * 13)}px`; 
-  } else if (direction === 'left') {
-    button.style.top = `${120 + (indexVal * 117)}px`; 
-    button.style.left = `${-347 + (indexVal * -105)}px`; 
-  } else if (direction === 'right') {
-    button.style.top = `${120 + (indexVal * 117)}px`; 
-    button.style.left = `${-276 + (indexVal * -105)}px`; 
-  }
-});
 
 function shuffleWordSquare(square) {
   const shuffledSquare = JSON.parse(JSON.stringify(square)); //Deep copy of the square
