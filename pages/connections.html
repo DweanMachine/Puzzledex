@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connections</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/connections.css">
+</head>
+<body>
+  <div id="headContent">
+  <h1 class="headItem">Connections</h1> 
+  <u class="headItem" onclick="window.location.reload();" style="cursor: pointer;">New Puzzle</u>
+  </div>
+  <hr>
+  <div id="gridContainer"></div>
+  <div id="controls">
+    <button onclick="displayResults()">SUBMIT</button>
+    <button onclick="reshuffle()">RESHUFFLE</button>
+  </div>
+  <div id="splashScreen">
+    <div id="splashContent">
+      <h2 id="splashHeadline">Category Found!</h2>
+      <p id="categoryInfo"></p>
+      <button onclick="closeSplashScreen()">Close</button>
+    </div>
+  </div>
+
+  <script src="../js/connections.js"></script>
+</body>
+</html>

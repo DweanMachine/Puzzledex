@@ -1,0 +1,117 @@
+[
+  {
+    "category": "Pets",
+    "words": ["Dog", "Cat", "Hamster", "Goldfish"],
+    "difficulty": "Yellow"
+  },
+  {
+    "category": "Shades of Red",
+    "words": ["Crimson", "Scarlet", "Burgundy", "Ruby"],
+    "difficulty": "Green"
+  },
+  {
+    "category":"Parts of an Eye",
+    "words": ["Cornea", "Iris", "Pupil", "Retina"],
+    "difficulty": "Green"
+  },
+  {
+    "category": "Biometrics",
+    "words": ["Fingerprint", "Retina", "Voice", "Face"],
+    "difficulty": "Green"
+  },
+  {
+    "category": "Holy ____",
+    "words": ["Cow", "Crow", "Moly", "Toledo"],
+    "difficulty": "Purple"
+  },
+  {
+    "category": "Monuments",
+    "words": ["Sphynx", "Statue", "Tower", "Ziggurat"],
+    "difficulty": "Green"
+  },
+  {
+    "category": "Silent 'G'",
+    "words": ["Gnome", "Design", "Champagne", "Bologna"],
+    "difficulty": "Blue"
+   },
+   {
+    "category": "Birds",
+    "words": ["Flamingo", "Falcon", "Hawk", "Parrot"],
+    "difficulty": "Yellow"
+   },
+   {
+    "category": "Music Genres",
+    "words": ["Jazz", "Country", "Rock", "Pop"],
+    "difficulty":"Yellow"
+   },
+   {
+    "category": "Land Formations",
+    "words": ["Mountain", "Valley", "Hill", "Ravine"],
+    "difficulty": "Yellow"
+   },
+   {
+    "category": "Weather",
+    "words": ["Sleet", "Rain", "Snow", "Hail"],
+    "difficulty": "Yellow"
+   },
+   {
+    "category": "Parts of a Tree",
+    "words": ["Branch", "Trunk", "Leaves", "Roots"],
+    "difficulty": "Green"
+   },
+   {
+    "category": "Parts of a Car",
+    "words": ["Engine", "Trunk", "Wheel", "Tire"],
+    "difficulty": "Green"
+   },
+   { 
+    "category": "Famous Kevins",
+    "words": ["Bacon", "Hart", "Spacey", "Costner"],
+    "difficulty": "Blue"
+   },
+   {
+    "category":"Head____",
+    "words": ["Quarters", "Rest", "Strong", "Phones"],
+    "difficulty": "Purple"
+   },
+   {
+    "category":"Found in the word 'teacher'",
+    "words": ["Tea", "Ache", "Her", "Each"],
+    "difficulty": "Blue"
+   },
+   {
+    "category":"____bell",
+    "words": ["Door", "Cow", "Dumb", "Tinker"],
+    "difficulty": "Purple"
+   },
+   {
+    "category":"Great Cats",
+    "words": ["Maine Coon", "Persian", "Siamese", "Bengal"],
+    "difficulty": "Blue"
+   },
+   {
+    "category":"Famous Bridges",
+    "words": ["Brooklyn", "Jeff", "London", "Golden Gate"],
+    "difficulty": "Blue"
+   },
+   {
+    "category":"Small Amount of Time",
+    "words": ["Second", "Flash", "Jiffy", "Blink"],
+    "difficulty": "Green"
+   },
+   {
+    "category":"Magic Words",
+    "words": ["Please", "Presto", "Viola", "Ta-Da!"],
+    "difficulty": "Green"
+   },
+   {
+    "category":"Urge",
+    "words": ["Itch", "Yearn", "Need", "Crave"],
+    "difficulty": "Blue"
+   },
+   {
+    "category":"Common Dog Names",
+    "words": ["Fido", "Rover", "Max", "Spot"],
+    "difficulty": "Green"
+   }
+]

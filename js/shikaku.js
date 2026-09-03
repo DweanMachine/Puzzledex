@@ -9,7 +9,7 @@ const colors = {
   "indigo"  : "hsl(230, 100%, 60%)",
   "purple"  : "hsl(270, 100%, 60%)",
   "pink"    : "hsl(290, 100%, 60%)",
-  "magenta" : "hsl(325, 100%, 50%)"
+  "magenta" : "hsl(335, 100%, 76%)"
 }
 const colorValues = Object.values(colors); //Colors as an array
 
@@ -21,6 +21,7 @@ let lastHoveredButton = null;
 let previewButtons = [];  // Buttons currently highlighted in preview
 
 function createGrid(size) {
+  colorCount = 0;
   gridSize = size;
   gameBoard.innerHTML = null;
   for (let row = 0; row < size; row++) {
@@ -35,16 +36,17 @@ function createGrid(size) {
 
       button.addEventListener('mousedown', onMouseDown);
       button.addEventListener('mouseover', onMouseOver);
-      document.addEventListener('mouseup', (e) => {
-        if (!isDragging) return;
-        onMouseUp(e);
-        isDragging = false;
-      });
 
       rowElement.append(button);
     }
   }
 }
+
+document.addEventListener('mouseup', (e) => {
+  if (!isDragging) return;
+  onMouseUp(e);
+  isDragging = false;
+});
 
 // Helper: get a button by row/col
 function getButton(row, col) {
@@ -89,29 +91,24 @@ function onMouseUp(event) {
 
 function previewRect(endButton) {
   // Clear previous preview by restoring each button's saved original color
-  previewButtons.forEach(b => {
-    if (!b.dataset.committed) {
-      b.style.backgroundColor = b.dataset.originalColor || '';
-      delete b.dataset.previewActive;
+  previewButtons.forEach(button => {
+    if (!button.dataset.committed) {
+      button.style.backgroundColor = button.dataset.originalColor || '';
+      //delete button.dataset.originalColor;
     }
   });
 
-  const row1 = +startButton.dataset.row, col1 = +startButton.dataset.col;
-  const row2 = +endButton.dataset.row,   col2 = +endButton.dataset.col;
+  const row1 =+ startButton.dataset.row, col1 =+ startButton.dataset.col;
+  const row2 =+ endButton.dataset.row,   col2 =+ endButton.dataset.col;
   previewButtons = getButtonsInRect(row1, col1, row2, col2);
 
   // Show a translucent preview
-  previewButtons.forEach(b => {
-    if (!b.dataset.committed) {
-      // Save original color before overwriting it (only on first preview touch)
-      if (!b.dataset.previewActive) {
-        b.dataset.originalColor = b.style.backgroundColor || '';
-        b.dataset.previewActive = 'true';
-      }
-      let previewColor = colorValues[colorCount % colorValues.length];
-      previewColor = previewColor.replace(')', ', 0.65)');
-      b.style.backgroundColor = previewColor;
-    }
+  let previewColor = colorValues[colorCount % colorValues.length];
+  previewColor = previewColor.replace(')', ', 0.65)');
+  previewButtons.forEach(button => {
+      button.dataset.originalColor = button.style.backgroundColor || ''; //Save before overwriting
+      console.log(button.style.backgroundColor, button.dataset.originalColor );
+      button.style.backgroundColor = previewColor;
   });
 }
 
@@ -127,13 +124,20 @@ function commitRect(endButton) {
   const buttons = getButtonsInRect(row1, col1, row2, col2);
   buttons.forEach(b => {
     b.style.backgroundColor = color;
-    b.dataset.committed = 'true';
+    b.dataset.committed = 'true'; 
     delete b.dataset.originalColor;
     delete b.dataset.previewActive;
   });
+
 }
 
-// Stop dragging if mouse leaves the board
-document.addEventListener('mouseup', () => { isDragging = false; });
+function clearGrid() {
+  const buttons = gameBoard.querySelectorAll('button');
+  buttons.forEach(button => {
+    button.style.backgroundColor = '';
+    delete button.dataset.committed;
+    delete button.dataset.originalColor;
+  });
+}
 
 createGrid(5);

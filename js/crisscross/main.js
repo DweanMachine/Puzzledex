@@ -3,31 +3,28 @@ let wordSquares = [];
 
 async function fetchJSONData() {
   try {
-    const response = await fetch('../wordlists/four-letter-words.json');
+    const response = await fetch('../wordlists/three-letter-words.json');
 
     // Check if the request was successful
     if (!response.ok) { throw new Error(`HTTP error! Status: ${response.status}`); }
 
     //Parse the response body as JSON
     wordList = await response.json(); 
-    //createWordSquare();
 
   } catch (error) {
     console.error('Error fetching JSON:', error);
   }
 }
 
-//Call the function
-fetchJSONData();
+//Call worker then call function
+const worker = new Worker('../js/crisscross/worker2.js');
+fetchJSONData().then(() => worker.postMessage(wordList));;
 
-const worker = new Worker('../Criss-Crossword/assets/js/worker.js');
-
+let workerReady = false;
 worker.onmessage = ({ data: squares }) => {
-  console.log(`Found ${squares.length} word squares`);
-  // render results...
+  wordSquares = squares; 
+  workerReady = true;
 };
-
-worker.postMessage('../wordlists/four-letter-words.json');
 
 const outputspan = document.getElementById('output');
 
@@ -36,11 +33,15 @@ var currentSquare = [];
 
 //Function to generate a random word square and display it
 document.getElementById('generateButton').addEventListener('click', () => {
-  console.log("Possible word squares:", wordSquares.length);
-  const randomIndex = Math.floor(Math.random() * wordSquares.length);
+  if (!workerReady) {
+    console.warn("Still computing, please wait.");
+    return;
+  }
   
+  const randomIndex = Math.floor(Math.random() * wordSquares.length);
+
   currentSquare = wordSquares[randomIndex];
-  currentSquare = currentSquare.map(line => line.replace(/\s/g, '').split('')); //Remove spaces and 
+  currentSquare = currentSquare.map(line => line.replace(/\s/g, '').split('')); //Remove spaces 
   
   solutionWords = pullWords(currentSquare);
   console.log("Solution:", solutionWords);
@@ -48,8 +49,8 @@ document.getElementById('generateButton').addEventListener('click', () => {
   currentSquare = shuffleWordSquare(currentSquare); //Shuffle the word square to create a new configuration
 
   cells.forEach((cell, index) => {
-    const cellRow = Math.floor(index / 4); //Calculate the row index for the current cell
-    const cellCol = index % 4; //Calculate the column index for the current cell
+    const cellRow = Math.floor(index / 3); //Calculate the row index for the current cell
+    const cellCol = index % 3; //Calculate the column index for the current cell
     cell.innerText = currentSquare[cellRow][cellCol];
   });
   determineColor(currentSquare); //Determine the colors of the cells based on the current configuration
@@ -90,8 +91,8 @@ shifts.forEach(button => {
       return;
     }
     cells.forEach((cell, index) => {
-        const cellRow = Math.floor(index / 4);
-        const cellCol = index % 4;
+        const cellRow = Math.floor(index / 3);
+        const cellCol = index % 3;
         cell.innerText = currentSquare[cellRow][cellCol];
     });
     determineColor(currentSquare);
@@ -106,7 +107,7 @@ function shuffleWordSquare(square) {
   const shuffleCount = Math.floor(Math.random() * 5) + 10; //Random number of shuffles between 10 and 15
 
   for (let i = 0; i < shuffleCount; i++) {
-    const index = Math.floor(Math.random() * 4); //Randomly select a row or column index
+    const index = Math.floor(Math.random() * 3); //Randomly select a row or column index
 
     if (Math.random() < 0.5) { //if < 0.5, shuffle a row; if >= 0.5, shuffle a column
       //Shuffle row
@@ -126,41 +127,39 @@ function shuffleWordSquare(square) {
 }
 
 function determineColor(square) {
-  const words = pullWords(square);
-  console.log("Current words:", words, words.length);
-  clearColors(); //Reset colors before determining new colors
-  for (let i = 0; i < words.length; i++) {
-    if (solutionWords[i] === words[i]) {
-      assignColors(i, '#93c47d'); //Green for correct words in the correct position
-    } else if (solutionWords.includes(words[i])) {
-      assignColors(i, '#ffd966'); //Yellow for correct words in the wrong position
-    } else if (wordList.includes(words[i])) {
-      assignColors(i, '#e06666'); //Red for valid words not present in the puzzle
-    }
-  };
+  const {rowWords, colWords} = pullWords(square);
+  const {rowWords: solutionRows, colWords: solutionCols} = solutionWords;
+  const allSolution = [...solutionRows, ...solutionCols];
+
+  clearColors();
+
+  [...rowWords, ...colWords].forEach((word, i) => {
+    const isRow = i < 3;
+    const idx = i % 3;
+    const color = word === (isRow ? solutionRows[idx] : solutionCols[idx])
+      ? '#93c47d'
+      : allSolution.includes(word) ? '#ffd966'
+      : wordList.includes(word) ? '#e06666'
+      : null;
+
+    if (color) assignColors(idx, isRow, color);
+  });
 }
 
-function assignColors(index, color) {
-  for (let j = 0; j < 4; j++) {    
-    if (index % 2 === 1) {
-      var cellCol = j; 
-      var cellRow = Math.floor(index / 2); 
-    } else {
-      var cellCol = Math.floor(index / 2); 
-      var cellRow = j;
-    }
+function assignColors(index, isRow, color) {
+  for (let j = 0; j < 3; j++) {
+    const cellRow = isRow ? index : j;
+    const cellCol = isRow ? j : index;
+    const cellIndex = cellRow * 3 + cellCol; // also fixes bug #3
     
-    const cellIndex = cellRow * 3 + cellCol; //Calculate the cell index based on row & column
-
-    //Color priority Green > Yellow > Red. A cell will only change color if the new color has higher priority than the current color.
-    if (cells[cellIndex].style.backgroundColor === '#93c47d') {
-      continue; //Skip if the cell is already green
-    } else if (color === '#ffd966' && cells[cellIndex].style.backgroundColor !== '#93c47d') {
-      cells[cellIndex].style.backgroundColor = color; //Assign yellow if not already green
-    } else if (color === '#e06666' && cells[cellIndex].style.backgroundColor === 'white') {
-      cells[cellIndex].style.backgroundColor = color; //Assign red if not already green or yellow
-    } else if (color === '#93c47d') {
-      cells[cellIndex].style.backgroundColor = color; //Assign green regardless of current color
+    const cell = cells[cellIndex];
+    if (cell.style.backgroundColor === '#93c47d') continue;
+    if (color === '#93c47d') {
+      cell.style.backgroundColor = color;
+    } else if (color === '#ffd966' && cell.style.backgroundColor !== '#93c47d') {
+      cell.style.backgroundColor = color;
+    } else if (color === '#e06666' && cell.style.backgroundColor === 'white') {
+      cell.style.backgroundColor = color;
     }
   }
 }
@@ -172,16 +171,18 @@ function clearColors() {
 }
 
 function pullWords(square) {
-  var words = []; 
-  //Combine each column or row into a word
-  for (let col = 0; col < 4; col++) {
-    let columnWord = '', rowWord = '';
-    for (let row = 0; row < 4; row++) {
-      columnWord += square[row][col];
-      rowWord += square[col][row];
+  const rowWords = [];
+  const colWords = [];
+
+  for (let i = 0; i < 3; i++) {
+    rowWords.push(square[i].join(''));
+
+    let colWord = '';
+    for (let row = 0; row < 3; row++) {
+      colWord += square[row][i];
     }
-    words.push(columnWord);
-    words.push(rowWord);
+    colWords.push(colWord);
   }
-  return words;
+
+  return { rowWords, colWords };
 }

@@ -1,4 +1,4 @@
-// Build prefix map: prefix -> [words starting with that prefix]
+//This worker finds all 3x3 word squares from a given list of words.
 function buildPrefixMap(wordList) {
   const map = new Map();
   for (const word of wordList) {
@@ -13,27 +13,42 @@ function buildPrefixMap(wordList) {
 
 function findWordSquares(wordList) {
   const prefixMap = buildPrefixMap(wordList);
-  //const wordSet = new Set(wordList);
+  const wordSet = new Set(wordList);
+  const size = 3;
   const results = [];
   const board = [];
 
   function getCandidates(row) {
-    // For each column, get words matching that column's prefix so far
-    // Then intersect — start from the column with fewest matches
-    let smallestSet = null;
+    // Build the current prefix for each column given rows placed so far
+    const prefixes = Array.from({ length: size }, (_, col) =>
+      board.map(w => w[col]).join('')
+    );
 
-    for (let col = 0; col < 4; col++) {
-      const prefix = board.map(w => w[col]).join('') ;
-      const matches = prefixMap.get(prefix) ?? [];
-      if (smallestSet === null || matches.length < smallestSet.length) {
-        smallestSet = matches;
-      }
+    // Get candidate sets per column and find the smallest
+    const sets = prefixes.map(p => new Set(prefixMap.get(p) ?? []));
+    let smallestIdx = 0;
+    for (let i = 1; i < size; i++) {
+      if (sets[i].size < sets[smallestIdx].size) smallestIdx = i;
     }
-    return smallestSet ?? [];
+
+    //Start from the smallest set and filter against ALL column constraints
+    //A candidate word is valid if:
+    // - For each column col, the prefix so far + word[col] exists in the prefix map
+    return [...sets[smallestIdx]].filter(word => {
+      for (let col = 1; col < size; col++) {
+          const nextPrefix = prefixes[col] + word[col];
+          if (!prefixMap.has(nextPrefix)) return false;
+      }
+      return true;
+    });
   }
 
   function backtrack(row) {
-    if (row === 4) {
+    if (row === size) {
+      for (let col = 1; col < size; col++) {
+        const colWord = board.map(w => w[col]).join('');
+        if (!wordSet.has(colWord)) return;
+      }
       results.push([...board]);
       return;
     }
@@ -42,24 +57,16 @@ function findWordSquares(wordList) {
 
     for (const word of candidates) {
       board.push(word);
-
-      // Verify all column prefixes are valid
-      let valid = true;
-      for (let col = 0; col < 4; col++) {
-        const prefix = board.map(w => w[col]).join('');
-        if (!prefixMap.has(prefix)) { valid = false; break; }
-      }
-
-      if (valid) backtrack(row + 1);
+      backtrack(row + 1);
       board.pop();
     }
   }
 
   backtrack(0);
+  console.log(`Found ${results.length} word squares`);
   return results;
 }
 
-// Receive wordList from main thread, send back results
 self.onmessage = ({ data: wordList }) => {
   const squares = findWordSquares(wordList);
   self.postMessage(squares);

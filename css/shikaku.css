@@ -12,6 +12,7 @@ div button {
   background-color: white;
   border: solid 1px #000000;
   margin: 1px;
+  border-radius: 3px;
 }
 
 div button:hover{

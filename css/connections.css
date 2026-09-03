@@ -1,0 +1,108 @@
+hr {
+  margin-bottom: 35px;
+}
+
+button {
+  cursor: pointer;
+}
+
+#headContent {
+  display: flex;
+  align-items: center;
+}
+
+.headItem {
+  margin-right: 16px;
+}
+
+#gridContainer {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+#controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#controls button {
+  width: 120px;
+  height: 40px;
+  font-size: 0.8rem;
+  margin: 3px;
+  border-radius: 5px;
+  border: transparent;
+  background-color: hsl(0, 0%, 90%);
+}
+
+#controls button:hover {
+  background-color: hsl(0, 0%, 80%);
+  transform: scale(1.035);
+  transition: transform 0.05s ease-in-out;
+}
+
+#controls button:active {
+  background-color: hsl(0, 0%, 80%);
+  transform: scale(1.0);
+  transition: transform 0.05s ease-in-out;
+}
+
+#splashScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 120px;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: rgba(240, 240, 240, 0.925);
+  border: 2px solid #ccc;
+  display: none; /* Hidden by default */
+}
+
+.gameButton {
+  width: 180px;
+  height: 75px;
+  margin: 3px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: transparent;
+  background-color: hsl(45, 35%, 88%);
+}
+
+.gameButton:hover {
+  background-color: hsl(45, 35%, 73%);
+  transform: scale(1.035);
+  transition: transform 0.05s ease-in-out;
+}
+
+.gameButton:active {
+  background-color: hsl(45, 35%, 63%);
+  transform: scale(1.00);
+  transition: transform 0.05s ease-in;
+}
+
+.selected {
+  background-color: hsl(45, 35%, 63%);
+}
+
+.found {
+  background-color: var(--found-color);
+  color: white;
+  cursor: default;
+}
+
+.found:hover {
+  background-color: var(--found-color);
+  transform: none;
+  transition: transform 0.05s ease-in-out;
+}
+
+.found:active {
+  background-color: var(--found-color);
+  transform: none;
+  transition: transform 0.05s ease-in;
+} 

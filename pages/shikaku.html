@@ -9,13 +9,14 @@
 </head>
 <body>
   <h1>Shikaku</h1>
+  <hr>
   <select>Size
     <option onclick="createGrid(5)">5x5</option>
     <option onclick="createGrid(7)">7x7</option>
     <option onclick="createGrid(10)">10x10</option>
     <option onclick="createGrid(20)">20x20</option>
   </select> 
-  <button id="generateButton" onclick="createGrid(0)">Clear</button> <br>
+  <button id="generateButton" onclick="clearGrid()">Clear</button> <br>
   <div id="gameBoard"></div>
   <script src="../js/shikaku.js"></script>
 </body>
