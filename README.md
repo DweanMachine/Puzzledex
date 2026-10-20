@@ -1,5 +1,5 @@
 # Criss-Crossword
-A javascript-based word game.
+A few javascript-based word games.
 
 ## How to Play:
 Word squares are 3x3 squares made of 9 letters, making 6 words: *3 vertical & 3 horizontal.* Use the arrows outside of the word square to unscramble the scrambled word squares.\
