@@ -13,6 +13,12 @@ button {
 
 .headItem {
   margin-right: 16px;
+  cursor: pointer;
+  color: black;
+}
+
+.headItem:hover {
+  color: #8080ff;
 }
 
 #gridContainer {

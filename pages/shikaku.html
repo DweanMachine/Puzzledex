@@ -4,19 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shikaku</title>
-  <link rel="stylesheet" href="../css/global.css">  
+  <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/shikaku.css">
 </head>
 <body>
   <h1>Shikaku</h1>
   <hr>
-  <select>Size
-    <option onclick="createGrid(5)">5x5</option>
-    <option onclick="createGrid(7)">7x7</option>
-    <option onclick="createGrid(10)">10x10</option>
-    <option onclick="createGrid(20)">20x20</option>
-  </select> 
-  <button id="generateButton" onclick="clearGrid()">Clear</button> <br>
+  <p class="rules">Divide the grid into rectangles. Each rectangle must contain exactly one number, equal to its area.
+    Drag to draw; click a rectangle (or right-click) to remove it.</p>
+  <div class="controls">
+    <label>Size
+      <select id="sizeSelect">
+        <option value="5">5x5</option>
+        <option value="7">7x7</option>
+        <option value="10">10x10</option>
+        <option value="20">20x20</option>
+      </select>
+    </label>
+    <button id="newButton">New Puzzle</button>
+    <button id="clearButton">Clear</button>
+  </div>
   <div id="gameBoard"></div>
   <script src="../js/shikaku.js"></script>
 </body>

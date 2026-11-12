@@ -1,20 +1,40 @@
-#gameBoard {
-  margin-top: 10px;
-}
+.rules { text-align: center; }
 
-button {
+.controls { display: flex; gap: 10px; align-items: center; }
+
+.controls button {
+  padding: 4px 12px;
   cursor: pointer;
 }
 
-div button {
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  border: solid 1px #000000;
-  margin: 1px;
-  border-radius: 3px;
+#status {
+  min-height: 1.5em;
+  font-weight: bold;
 }
 
-div button:hover{
-  background-color: rgba(192, 192, 192, 0.8);
+#gameBoard {
+  display: grid;
+  gap: 2px;
+  margin-top: 10px;
+  touch-action: none;
+  user-select: none;
 }
+
+.cell {
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: solid 1px #000000;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#gameBoard.big .cell { --size: 21px; font-size: 12px; }
+
+.cell:hover { filter: brightness(0.9); }
+.cell.preview { outline: 2px solid #000; outline-offset: -2px; }

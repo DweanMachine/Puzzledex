@@ -24,7 +24,7 @@ h1 {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 #generateButton:hover {
@@ -49,22 +49,27 @@ h1 {
   gap: 5px;
 }
 
+/* 36px side button + 8px gap push the arrows over the three 100px cells */
 #top-arrows, #bottom-arrows {
   display: flex;
-  gap: 10px;
-  /* match cell width + gap to align arrows over columns */
-  width: calc(3 * 120px + 2 * 10px);
-  justify-content: space-between;
-  padding: 0 38px; /* centers arrows over each cell */
+  gap: 5px;
+  padding-left: 44px;
+  align-self: flex-start;
 }
 
+#top-arrows .shift, #bottom-arrows .shift {
+  width: 100px;
+}
 
+#status {
+  min-height: 1.5em;
+  margin: 0 0 12px;
+  font-weight: bold;
+}
 
-#output {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 5px;
+#generateButton:disabled {
+  background-color: #8aa;
+  cursor: default;
 }
 
 .cell {
@@ -78,11 +83,7 @@ h1 {
   font-size: 52px;
   background-color: white;
   transition: background-color 0.15s ease;
-  cursor: pointer;
-}
-
-.cell:hover {
-  background-color: #e8f0fe;
+  user-select: none;
 }
 
 .shift {
@@ -102,6 +103,3 @@ h1 {
   opacity: 1;
 }
 
-.down  { transform: rotate(180deg); }
-.right { transform: rotate(90deg); }
-.left  { transform: rotate(270deg); }

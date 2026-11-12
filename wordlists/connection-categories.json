@@ -5,6 +5,11 @@
     "difficulty": "Yellow"
   },
   {
+    "category":"Silent 'P'",
+    "words":["Raspberry", "Corps", "Psychic", "Receipt"],
+    "difficulty": "Blue"
+  },
+  {
     "category": "Shades of Red",
     "words": ["Crimson", "Scarlet", "Burgundy", "Ruby"],
     "difficulty": "Green"
@@ -20,8 +25,23 @@
     "difficulty": "Green"
   },
   {
+    "category": "Computer Shortcuts",
+    "words": ["Copy", "Paste", "Undo", "Save"],
+    "difficulty": "Green"
+  },
+  {
     "category": "Holy ____",
     "words": ["Cow", "Crow", "Moly", "Toledo"],
+    "difficulty": "Purple"
+  },
+  {
+    "category": "House ____",
+    "words": ["Party", "Music", "Rules", "Arrest"],
+    "difficulty": "Purple"
+  },
+  {
+    "category": "Idioms for Trouble",
+    "words": ["Hot Water", "Doghouse", "Thin Ice", "Pickle"],
     "difficulty": "Purple"
   },
   {
@@ -50,7 +70,12 @@
     "difficulty": "Yellow"
    },
    {
-    "category": "Weather",
+    "category": "Bodies of Water",
+    "words": ["Stream", "River", "Bay", "Lagoon"],
+    "difficulty": "Yellow"
+   },
+   {
+    "category": "Precipitation",
     "words": ["Sleet", "Rain", "Snow", "Hail"],
     "difficulty": "Yellow"
    },
@@ -80,14 +105,19 @@
     "difficulty": "Blue"
    },
    {
+    "category":"Anagrams",
+    "words": ["Bruise", "Buries", "Busier", "Rubies"],
+    "difficulty": "Blue"
+   },
+   {
     "category":"____bell",
     "words": ["Door", "Cow", "Dumb", "Tinker"],
     "difficulty": "Purple"
    },
    {
-    "category":"Great Cats",
+    "category":"Cat Breeds",
     "words": ["Maine Coon", "Persian", "Siamese", "Bengal"],
-    "difficulty": "Blue"
+    "difficulty": "Green"
    },
    {
     "category":"Famous Bridges",
@@ -113,5 +143,10 @@
     "category":"Common Dog Names",
     "words": ["Fido", "Rover", "Max", "Spot"],
     "difficulty": "Green"
+   },
+   {
+    "category":"Aquatic Creatures",
+    "words": ["Squid", "Whale", "Shark", "Clam"],
+    "difficulty": "Yellow"
    }
 ]
