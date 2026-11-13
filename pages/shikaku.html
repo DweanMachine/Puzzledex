@@ -8,23 +8,26 @@
   <link rel="stylesheet" href="../css/shikaku.css">
 </head>
 <body>
-  <h1>Shikaku</h1>
+  <header class="pageHeader">
+    <h1>Shikaku</h1>
+    <a class="homeLink" href="../index.html">Home</a>
+  </header>
   <hr>
   <p class="rules">Divide the grid into rectangles. Each rectangle must contain exactly one number, equal to its area.
     Drag to draw; click a rectangle (or right-click) to remove it.</p>
   <div class="controls">
-    <label>Size
-      <select id="sizeSelect">
-        <option value="5">5x5</option>
-        <option value="7">7x7</option>
-        <option value="10">10x10</option>
-        <option value="20">20x20</option>
-      </select>
-    </label>
-    <button id="newButton">New Puzzle</button>
-    <button id="clearButton">Clear</button>
+    <select id="sizeSelect">
+      <option value="5">5x5</option>
+      <option value="7">7x7</option>
+      <option value="10">10x10</option>
+      <option value="20">20x20</option>
+    </select>
+    <button class="btn" id="newButton">New Puzzle</button>
+    <button class="btn" id="clearButton">Clear</button>
   </div>
+  <p id="status"></p>
   <div id="gameBoard"></div>
+
   <script src="../js/shikaku.js"></script>
 </body>
 </html>

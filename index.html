@@ -5,16 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Puzzledex</title>
   <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-  <h1>Puzzledex</h1>
+  <header class="pageHeader">
+    <h1>Puzzledex</h1>
+  </header>
   <hr>
-  <p>Games:</p>
-  <ul>
-    <li><a href="pages/connections.html">Connections</a></li>
-    <li><a href="pages/shikaku.html">Shikaku</a></li>
-    <li><a href="pages/crisscross.html">Criss-Crossword</a></li>
-    <li><a href="pages/wordle.html">Wordle</a></li>
-  </ul>
+  <p class="rules">A collection of small browser puzzle games. Pick one to play.</p>
+
+  <nav class="gameList">
+    <a class="gameCard" href="pages/connections.html">
+      <h2>Connections</h2>
+      <p>Sort sixteen words into four hidden categories.</p>
+    </a>
+    <a class="gameCard" href="pages/shikaku.html">
+      <h2>Shikaku</h2>
+      <p>Divide the grid into rectangles that match their numbers.</p>
+    </a>
+    <a class="gameCard" href="pages/crisscross.html">
+      <h2>Criss-Crossword</h2>
+      <p>Slide the letters until the 3x3 word square makes six words.</p>
+    </a>
+    <a class="gameCard" href="pages/wordle.html">
+      <h2>Wordle</h2>
+      <p>Guess the five-letter word in six tries.</p>
+    </a>
+  </nav>
 </body>
 </html>

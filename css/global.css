@@ -3,3 +3,94 @@
 * {
   font-family: 'Asap', Arial, Helvetica, sans-serif;
 }
+
+/* ---------- Page layout (shared by every game) ---------- */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  background-image: linear-gradient(beige, seashell);
+  background-attachment: fixed;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.pageHeader h1 {
+  margin: 0.67em 0;
+}
+
+.homeLink {
+  color: black;
+  font-size: 0.9rem;
+}
+
+.homeLink:hover {
+  color: #8080ff;
+}
+
+hr {
+  width: 100%;
+  margin: 0 0 25px;
+}
+
+.rules {
+  max-width: 600px;
+  margin: 0 0 15px;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+#status {
+  min-height: 1.5em;
+  margin: 0 0 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 0.9rem;
+  border: transparent;
+  border-radius: 5px;
+  background-color: hsl(0, 0%, 90%);
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) {
+  background-color: hsl(0, 0%, 80%);
+  transform: scale(1.035);
+  transition: transform 0.05s ease-in-out;
+}
+
+.btn:active:not(:disabled) {
+  background-color: hsl(0, 0%, 75%);
+  transform: scale(1);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.controls select {
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}

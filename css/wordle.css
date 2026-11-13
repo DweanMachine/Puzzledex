@@ -1,12 +1,3 @@
-.rules { text-align: center; }
-
-#newButton { padding: 4px 12px; cursor: pointer; }
-
-#status {
-  font-weight: bold;
-  text-align: center;
-}
-
 #gridContainer {
   display: flex;
   flex-direction: column;

@@ -8,13 +8,19 @@
   <link rel="stylesheet" href="../css/wordle.css">
 </head>
 <body>
-  <h1>Wordle</h1>
+  <header class="pageHeader">
+    <h1>Wordle</h1>
+    <a class="homeLink" href="../index.html">Home</a>
+  </header>
   <hr>
   <p class="rules">Guess the five-letter word in six tries.</p>
+  <div class="controls">
+    <button class="btn" id="newButton">New Puzzle</button>
+  </div>
   <p id="status"></p>
   <div id="gridContainer"></div>
   <div id="keyboard"></div>
-  <button id="newButton">New Word</button>
+
   <script src="../js/wordle.js"></script>
 </body>
 </html>

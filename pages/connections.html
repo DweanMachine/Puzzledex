@@ -6,25 +6,24 @@
   <title>Connections</title>
   <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/connections.css">
-  <script src="https://kit.fontawesome.com/ee13ff4682.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div id="headContent">
-    <h1 style="margin-right: 20px;">Connections</h1> 
-    <u class="headItem" onclick="window.location.reload();" style="cursor: pointer;">New Puzzle</u>
-    <a href="../index.html"><i id="home" class="headItem fa-solid fa-house"></i></a>
-  </div>
+  <header class="pageHeader">
+    <h1>Connections</h1>
+    <a class="homeLink" href="../index.html">Home</a>
+  </header>
   <hr>
-  <div id="gridContainer"></div>
-  <div id="controls">
-    <button onclick="displayResults()">SUBMIT</button>
-    <button onclick="reshuffle()">RESHUFFLE</button>
+  <div class="controls">
+    <button class="btn" onclick="window.location.reload()">New Puzzle</button>
+    <button class="btn" onclick="reshuffle()">Reshuffle</button>
+    <button class="btn" onclick="displayResults()">Submit</button>
   </div>
+  <div id="gridContainer"></div>
   <div id="splashScreen">
     <div id="splashContent">
       <h2 id="splashHeadline">Category Found!</h2>
       <p id="categoryInfo"></p>
-      <button onclick="closeSplashScreen()">Close</button>
+      <button class="btn" onclick="closeSplashScreen()">Close</button>
     </div>
   </div>
 

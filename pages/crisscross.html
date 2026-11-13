@@ -8,9 +8,15 @@
   <link rel="stylesheet" href="../css/crisscross.css">
 </head>
 <body>
-  <h1>Criss-Crossword</h1>
+  <header class="pageHeader">
+    <h1>Criss-Crossword</h1>
+    <a class="homeLink" href="../index.html">Home</a>
+  </header>
   <hr>
-  <button id="generateButton">Create New Word Square</button>
+  <p class="rules">Use the arrows to shift rows and columns until the scrambled letters form a valid word square.</p>
+  <div class="controls">
+    <button class="btn" id="generateButton">New Puzzle</button>
+  </div>
   <p id="status"></p>
 
   <div id="gameContainer">
